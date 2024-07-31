@@ -1,26 +1,12 @@
 const db = require('../../data/db-config.js')
 
 module.exports = {
-  findPosts,
   find,
   findById,
+  findPosts,
+  update,
   add,
   remove
-}
-
-function findPosts(user_id) {
-  /*
-    Implement so it resolves this structure:
-
-    [
-      {
-          "post_id": 10,
-          "contents": "Trusting everyone is...",
-          "username": "seneca"
-      },
-      etc
-    ]
-  */
 }
 
 function find() {
@@ -62,6 +48,34 @@ function findById(id) {
     }
   */
 }
+
+function update(id, changes) {
+  return db('users')
+    .where({ id })
+    .update(changes)
+    .then(() => {
+      return findById(id)
+    })
+}
+
+function findPosts(user_id) {
+  /*
+    Implement so it resolves this structure:
+
+    [
+      {
+          "post_id": 10,
+          "contents": "Trusting everyone is...",
+          "username": "seneca"
+      },
+      etc
+    ]
+  */
+}
+
+
+
+
 
 function add(user) {
   return db('users')

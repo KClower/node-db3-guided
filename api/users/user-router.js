@@ -36,6 +36,19 @@ router.post('/', checkUserData, (req, res, next) => {
     .catch(next)
 })
 
+router.put('/:id', checkUserId, checkUserData, (req, res) => {
+  const { id } = req.params.id;
+  const changes = req.body;
+
+  User.update(id, changes)
+    .then(user => {
+      if (user) {
+        return res.status(200).json(user);
+      }
+
+    })
+})
+
 router.delete('/:id', checkUserId, (req, res, next) => {
   User.remove(req.params.id)
     .then(count => {
